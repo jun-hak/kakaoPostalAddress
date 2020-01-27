@@ -5,6 +5,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>주소검색</title>
     </head>
+    <script type="text/javascript">
+    function getUrlParams() {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    return params;
+}
+    </script>
     <style>
     html,body{ margin:0; padding:0; height:100%; width:100%; }
     #full-size{
@@ -24,7 +31,9 @@
         var element_layer = document.getElementById('full-size');
         var geocoder = new daum.maps.services.Geocoder();
         
-
+        oParam = getUrlParams();
+         console.log(`${oParam}`);
+        console.log(`${oParam.test}`);
     
         daum.postcode.load(function() {
     
