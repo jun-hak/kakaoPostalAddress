@@ -40,9 +40,9 @@
                                       // 정상적으로 검색이 완료됐으면
                     if (status === daum.maps.services.Status.OK) {
                         var result = results[0]; //첫번째 결과의 값을 활용
-                        var jbAry = new Array();
-                        jbAry[0] = result.y;
-                        jbAry[1] = result.x;
+                        
+                        data.lat = result.y;
+                        data.lan = result.x;
                         callbackMessage(JSON.stringify(data));
                     }
                 });
