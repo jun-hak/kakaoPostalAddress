@@ -41,8 +41,8 @@
                     if (status === daum.maps.services.Status.OK) {
                         var result = results[0]; //첫번째 결과의 값을 활용
                         
-                        data.lat = result.y;
-                        data.lan = result.x;
+                        data.lat = result.y.toString();
+                        data.lan = result.x.toString();
                         callbackMessage(JSON.stringify(data));
                     }
                 });
