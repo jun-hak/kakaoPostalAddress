@@ -1,108 +1,112 @@
-
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>주소검색</title>
-    </head>
-    <script type="text/javascript">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>주소검색</title>
+</head>
+<script type="text/javascript">
     function getUrlParams() {
-    var params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-    return params;
-}
-    </script>
-    <style>
-    html,body{ margin:0; padding:0; height:100%; width:100%; }
-    #full-size{
-      height: 100%;
-      width: 100%;
-      overflow:hidden; /* or overflow:auto; if you want scrollbars */
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+            params[key] = value;
+        });
+        return params;
     }
-    </style>
-    <body>
-    <div id="full-size"></div>
-    </body>
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</script>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
     
+    #full-size {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        /* or overflow:auto; if you want scrollbars */
+    }
+</style>
+
+<body>
+    <div id="full-size"></div>
+</body>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8f0096a6486d0d456622ce48fa20790&libraries=services"></script>
-    <script type="text/javascript">
-        // 우편번호 찾기 화면을 넣을 element
-        var element_layer = document.getElementById('full-size');
-        oParam = getUrlParams();
-         console.log(`${oParam}`);
-        console.log(`${oParam.lat}`);
-        console.log(`${oParam.lan}`);
-        console.log(`${oParam.LatLng}`);
-        console.log(`${oParam.lat && oParam.lan}`);
+<script type="text/javascript">
+    // 우편번호 찾기 화면을 넣을 element
+    var element_layer = document.getElementById('full-size');
+    oParam = getUrlParams();
+    console.log(`${oParam}`);
+    console.log(`${oParam.lat}`);
+    console.log(`${oParam.lan}`);
+    console.log(`${oParam.LatLng}`);
+    console.log(`${oParam.lat && oParam.lan}`);
 
     //주소-좌표 변환 객체를 생성
     var geocoder = new daum.maps.services.Geocoder();
-    
-        daum.postcode.load(function() {
-    
-          function callbackMessage(message) {
-            try { onComplete.postMessage(message); } catch(err) {}
-          }
-    
-          new daum.Postcode({
-              oncomplete: function(data) {
-                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                  console.log(`1`);
-                  if(oParam.lat && oParam.lan){
-                    console.log(`12`);
-                    var coords = new daum.maps.LatLng(oParam.lat, oParam.lan);
+
+    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+    if (oParam.lat && oParam.lan) {
+        var coords = new daum.maps.LatLng(oParam.lat, oParam.lan);
         var mapOption = {
             center: coords, // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
-        console.log(`13`);
-            //지도를 미리 생성
-    var map = new daum.maps.Map(element_layer, mapOption);
-    console.log(`14`);
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(oParam.lat, oParam.lan),
-        map: map
-    });
 
-    console.log(`15`);
-    element_layer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-        
-                  }
+        //지도를 미리 생성
+        var map = new daum.maps.Map(element_layer, mapOption);
 
-                  else{
-                    console.log(`2`);
-                  geocoder.addressSearch(data.address, function(results, status) {
-                                      // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-                      console.log(`22`);
-                        var result = results[0]; //첫번째 결과의 값을 활용
-                        
-                        data.lat = result.y.toString();
-                        data.lan = result.x.toString();
-                        callbackMessage(JSON.stringify(data));
-                    }
-                });}
-
-
-              },
-              width : '100%',
-              height : '100%',
-              maxSuggestItems : 5,
-              alwaysShowEngAddr: false,
-              hideMapBtn: true,
-              hideEngBtn: false,
-          }).embed(element_layer);
-    
-          // iframe을 넣은 element를 보이게 한다.
-          element_layer.style.display = 'block';
+        //마커를 미리 생성
+        var marker = new daum.maps.Marker({
+            position: new daum.maps.LatLng(oParam.lat, oParam.lan),
+            map: map
         });
-    
-    </script>
-    </html>
+
+        element_layer.style.display = "block";
+        map.relayout();
+        // 지도 중심을 변경한다.
+        map.setCenter(coords);
+        // 마커를 결과값으로 받은 위치로 옮긴다.
+        marker.setPosition(coords)
+    } else {
+        daum.postcode.load(function() {
+
+            function callbackMessage(message) {
+                try {
+                    onComplete.postMessage(message);
+                } catch (err) {}
+            }
+
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    geocoder.addressSearch(data.address, function(results, status) {
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === daum.maps.services.Status.OK) {
+                            var result = results[0]; //첫번째 결과의 값을 활용
+
+                            data.lat = result.y.toString();
+                            data.lan = result.x.toString();
+                            callbackMessage(JSON.stringify(data));
+                        }
+                    });
+                },
+                width: '100%',
+                height: '100%',
+                maxSuggestItems: 5,
+                alwaysShowEngAddr: false,
+                hideMapBtn: true,
+                hideEngBtn: false,
+            }).embed(element_layer);
+
+            // iframe을 넣은 element를 보이게 한다.
+            element_layer.style.display = 'block';
+        });
+    }
+</script>
+
+</html>
