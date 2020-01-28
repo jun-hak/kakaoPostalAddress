@@ -31,7 +31,11 @@
         var element_layer = document.getElementById('full-size');
         oParam = getUrlParams();
          console.log(`${oParam}`);
-        console.log(`${oParam.test}`);
+        console.log(`${oParam.lat}`);
+        console.log(`${oParam.lan}`);
+        console.log(`${oParam.LatLng}`);
+        console.log(`${oParam.lat && oParam.lan}`);
+
     //주소-좌표 변환 객체를 생성
     var geocoder = new daum.maps.services.Geocoder();
     
