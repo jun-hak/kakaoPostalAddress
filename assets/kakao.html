@@ -48,28 +48,39 @@
           new daum.Postcode({
               oncomplete: function(data) {
                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                  
+                  console.log(`1`);
                   if(oParam.lat && oParam.lan){
+                    console.log(`12`);
         var mapOption = {
             center: new daum.maps.LatLng(oParam.lat, oParam.lan), // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
-                    
+        console.log(`13`);
             //지도를 미리 생성
     var map = new daum.maps.Map(element_layer, mapOption);
+    console.log(`14`);
     //마커를 미리 생성
     var marker = new daum.maps.Marker({
         position: new daum.maps.LatLng(oParam.lat, oParam.lan),
         map: map
     });
+
+    console.log(`15`);
+    mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
         
                   }
 
                   else{
-                  
+                    console.log(`2`);
                   geocoder.addressSearch(data.address, function(results, status) {
                                       // 정상적으로 검색이 완료됐으면
                     if (status === daum.maps.services.Status.OK) {
+                      console.log(`22`);
                         var result = results[0]; //첫번째 결과의 값을 활용
                         
                         data.lat = result.y.toString();
