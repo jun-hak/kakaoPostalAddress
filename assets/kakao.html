@@ -51,8 +51,9 @@
                   console.log(`1`);
                   if(oParam.lat && oParam.lan){
                     console.log(`12`);
+                    var coords = new daum.maps.LatLng(result.y, result.x);
         var mapOption = {
-            center: new daum.maps.LatLng(oParam.lat, oParam.lan), // 지도의 중심좌표
+            center: coords, // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
         console.log(`13`);
