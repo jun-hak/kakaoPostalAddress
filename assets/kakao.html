@@ -29,8 +29,6 @@
     <script type="text/javascript">
         // 우편번호 찾기 화면을 넣을 element
         var element_layer = document.getElementById('full-size');
-        var geocoder = new daum.maps.services.Geocoder();
-        
         oParam = getUrlParams();
          console.log(`${oParam}`);
         console.log(`${oParam.test}`);
@@ -44,6 +42,26 @@
           new daum.Postcode({
               oncomplete: function(data) {
                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                  
+                  if(oParam.lat && oParam.lan){
+        var mapOption = {
+            center: new daum.maps.LatLng(oParam.lat, oParam.lan), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+                    
+            //지도를 미리 생성
+    var map = new daum.maps.Map(element_layer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(oParam.lat, oParam.lan),
+        map: map
+    });
+        
+                  }
+
+                  else
                   
                   geocoder.addressSearch(data.address, function(results, status) {
                                       // 정상적으로 검색이 완료됐으면
