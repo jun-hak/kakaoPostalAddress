@@ -38,6 +38,9 @@ addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position) {
     
+    // 배열 초기화
+    markers = [];
+    
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         position: position
