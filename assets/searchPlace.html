@@ -190,6 +190,12 @@
     </script>
     <script type="text/javascript">
         oParam = getUrlParams();
+        console.log(`oParam - ${oParam}`);
+        console.log(`oParam1 - ${oParam.searchKeyword}`);
+        console.log(`oParam2 - ${oParam}`);
+        console.log(`oParam3 - ${oParam}`);
+        console.log(`oParam4 - ${oParam}`);
+
 
         // 장소 검색 객체를 생성합니다
         var ps = new kakao.maps.services.Places();
