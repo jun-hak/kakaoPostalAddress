@@ -191,6 +191,8 @@
     <script type="text/javascript">
         oParam = getUrlParams();
 
+        // 장소 검색 객체를 생성합니다
+        var ps = new kakao.maps.services.Places();
         // 우편번호와 주소 정보를 해당 필드에 넣는다.
         if (oParam.lat && oParam.lan) {
             //주소-좌표 변환 객체를 생성
