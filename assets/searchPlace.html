@@ -3,8 +3,7 @@
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <meta charset="utf-8">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
     <style>
         .map_wrap,
@@ -184,7 +183,10 @@
     <script type="text/javascript">
         function getUrlParams() {
             var params = {};
-            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+            const encodeQueryString = window.location.search;
+            const decodeQueryString = decodeURI(encodeQueryString);
+
+            decodeQueryString.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
                 params[key] = value;
             });
             return params;
