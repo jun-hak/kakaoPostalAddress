@@ -100,9 +100,8 @@
         // 우편번호와 주소 정보를 해당 필드에 넣는다.
         if (oParam.lat && oParam.lan) {
             console.log(`oParam8`);
-            var moveLatLon = new kakao.maps.LatLng(oParam.lat, oParam.lan);
+            moveMapAndMarker(oParam.lat, oParam.lan);
             console.log(`oParam9`);
-            moveMapAndMarker(moveLatLon);
         } else {
             console.log(`oParam111`);
 
@@ -187,7 +186,8 @@
         }
 
 
-        function moveMapAndMarker(moveLatLon) {
+        function moveMapAndMarker(lat, lan) {
+            var moveLatLon = new kakao.maps.LatLng(lat, lan);
             map.setCenter(moveLatLon);
             addMarker(moveLatLon);
         }
