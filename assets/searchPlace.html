@@ -187,9 +187,14 @@
 
 
         function moveMapAndMarker(lat, lan) {
+
+            console.log(`oParam8-1 - ${lat} - ${lan}`);
             var moveLatLon = new kakao.maps.LatLng(lat, lan);
+            console.log(`oParam8-2`);
             map.setCenter(moveLatLon);
+            console.log(`oParam8-3`);
             addMarker(moveLatLon);
+            console.log(`oParam8-4`);
         }
     </script>
 </body>
