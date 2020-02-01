@@ -21,35 +21,33 @@
         }
     </script>
     <script type="text/javascript">
-        $(function() {
-            oParam = getUrlParams();
-            console.log(`oParamsearchKeyword - ${oParam.searchKeyword}`);
+        oParam = getUrlParams();
+        console.log(`oParamsearchKeyword - ${oParam.searchKeyword}`);
 
-            // 장소 검색 객체를 생성합니다
-            var ps = new kakao.maps.services.Places();
+        // 장소 검색 객체를 생성합니다
+        var ps = new kakao.maps.services.Places();
 
-            // 키워드로 장소를 검색합니다
-            ps.keywordSearch(oParam.searchKeyword, placesSearchCB);
+        // 키워드로 장소를 검색합니다
+        ps.keywordSearch(oParam.searchKeyword, placesSearchCB);
 
-            // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-            function placesSearchCB(data, status, pagination) {
-                if (status === kakao.maps.services.Status.OK) {
+        // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+        function placesSearchCB(data, status, pagination) {
+            if (status === kakao.maps.services.Status.OK) {
 
-                    // 정상적으로 검색이 완료
-                    document.write(JSON.stringify(data));
-                } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                // 정상적으로 검색이 완료
+                return JSON.stringify(data);
+            } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-                    alert('검색 결과가 존재하지 않습니다.');
-                    return;
+                alert('검색 결과가 존재하지 않습니다.');
+                return;
 
-                } else if (status === kakao.maps.services.Status.ERROR) {
+            } else if (status === kakao.maps.services.Status.ERROR) {
 
-                    alert('검색 결과 중 오류가 발생했습니다.');
-                    return;
+                alert('검색 결과 중 오류가 발생했습니다.');
+                return;
 
-                }
             }
-        });
+        }
     </script>
 </body>
 
