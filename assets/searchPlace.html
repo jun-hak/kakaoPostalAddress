@@ -93,13 +93,8 @@
         console.log(`oParam7`);
         // 우편번호와 주소 정보를 해당 필드에 넣는다.
         if (oParam.lat && oParam.lan) {
-            console.log(`oParam8`);
-            var moveLatLon = new kakao.maps.LatLng(oParam.lat, oParam.lan);
-            console.log(`oParam9`);
-            // 지도 중심을 이동 시킵니다
-            map.setCenter(moveLatLon);
-            console.log(`oParam10`);
-            addMarker(moveLatLon);
+
+            moveMapNMaker(oParam.lat, oParam.lan);
             console.log(`oParam11`);
         } else {
             console.log(`oParam111`);
@@ -182,6 +177,16 @@
                 markers[i].setMap(null);
             }
             markers = [];
+        }
+
+        function moveMapNMaker(lat, lan) {
+            console.log(`move - oParam9`);
+            var moveLatLon = new kakao.maps.LatLng(lat, lan);
+
+            // 지도 중심을 이동 시킵니다
+            map.setCenter(moveLatLon);
+            console.log(`move - oParam10`);
+            addMarker(moveLatLon);
         }
     </script>
 
