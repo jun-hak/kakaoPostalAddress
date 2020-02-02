@@ -197,7 +197,7 @@
             console.log('findPlace - 5');
             var moveLatLon = marker.getPosition();
             console.log('findPlace - 6');
-            searchDetailAddrFromCoords(moveLatLon.toCoords(), function(result, status) {
+            geocoder.coord2Address(moveLatLon.getLng(), moveLatLon.getLat(), function(result, status) {
                 console.log('findPlace - 7');
                 if (status === kakao.maps.services.Status.OK) {
                     console.log('findPlace - 8');
@@ -222,11 +222,6 @@
                 }
                 console.log('findPlace - 9');
             });
-        }
-
-        function searchDetailAddrFromCoords(coords, callback) {
-            // 좌표로 법정동 상세 주소 정보를 요청합니다
-            geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
         }
     </script>
 
