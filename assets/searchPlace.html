@@ -86,19 +86,14 @@
             addMarker(mouseEvent.latLng);
         });
 
-        if (oParam.findPlace) {
-            console.log('findPlace - 1');
 
-            function callbackPlaceMessage(message) {
-                try {
-                    getPlace.postMessage(message);
-                } catch (err) {}
-            }
-            console.log('findPlace - 2');
-            // 키워드 검색을 요청하는 함수입니다
-            getPlaceInfo();
-            console.log('findPlace - 3');
-        } else if (oParam.lat && oParam.lan) {
+        function callbackPlaceMessage(message) {
+            try {
+                getPlace.postMessage(message);
+            } catch (err) {}
+        }
+
+        if (oParam.lat && oParam.lan) {
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
 
             moveMapNMaker(oParam.lat, oParam.lan);
