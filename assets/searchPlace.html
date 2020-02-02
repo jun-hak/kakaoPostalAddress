@@ -68,43 +68,39 @@
         // 장소 검색 객체를 생성합니다
         var ps = new kakao.maps.services.Places();
 
-        console.log(`oParam2`);
-
-        //주소-좌표 변환 객체를 생성
-        var geocoder = new daum.maps.services.Geocoder();
-        console.log(`oParam3`);
-        // 마커를 담을 배열입니다
-        var markers = [];
-        console.log(`oParam4`);
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
-                center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
-            };
-        console.log(`oParam5`);
-        // 지도를 생성합니다    
-        var map = new kakao.maps.Map(mapContainer, mapOption);
-        console.log(`oParam6`);
-        // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
-        kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-            // 클릭한 위치에 마커를 표시합니다 
-            addMarker(mouseEvent.latLng);
-        });
-        console.log(`oParam7`);
-        // 우편번호와 주소 정보를 해당 필드에 넣는다.
         if (oParam.lat && oParam.lan) {
+            console.log(`oParam2`);
+
+            //주소-좌표 변환 객체를 생성
+            var geocoder = new daum.maps.services.Geocoder();
+            console.log(`oParam3`);
+            // 마커를 담을 배열입니다
+            var markers = [];
+
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = {
+                    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+                    level: 3 // 지도의 확대 레벨
+                };
+
+            // 지도를 생성합니다    
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+
+            // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
+            kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+                // 클릭한 위치에 마커를 표시합니다 
+                addMarker(mouseEvent.latLng);
+            });
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
 
             moveMapNMaker(oParam.lat, oParam.lan);
-            console.log(`oParam11`);
         } else {
-            console.log(`oParam111`);
-
             function callbackMessage(message) {
                 try {
                     onSearchKeyword.postMessage(message);
                 } catch (err) {}
             }
-            console.log(`oParam2222`);
 
             // 키워드로 장소를 검색합니다
             searchPlaces(oParam.searchKeyword);
