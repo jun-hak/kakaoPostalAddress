@@ -11,7 +11,7 @@
             height: 100%;
             overflow: hidden;
         }
-        
+
         .map_wrap,
         .map_wrap * {
             margin: 0;
@@ -19,20 +19,20 @@
             font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
             font-size: 12px;
         }
-        
+
         .map_wrap a,
         .map_wrap a:hover,
         .map_wrap a:active {
             color: #000;
             text-decoration: none;
         }
-        
+
         .map_wrap {
             position: relative;
             width: 100%;
             height: 100%;
         }
-        
+
         .bg_white {
             background: #fff;
         }
@@ -52,13 +52,14 @@
             const encodeQueryString = window.location.search;
             const decodeQueryString = decodeURI(encodeQueryString);
 
-            decodeQueryString.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+            decodeQueryString.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
                 params[key] = value;
             });
             return params;
         }
     </script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8f0096a6486d0d456622ce48fa20790&libraries=services"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8f0096a6486d0d456622ce48fa20790&libraries=services"></script>
     <script type="text/javascript">
         oParam = getUrlParams();
 
@@ -82,17 +83,17 @@
 
 
         if (!oParam.modifyMarker)
-        // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
-            kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-            // 클릭한 위치에 마커를 표시합니다 
-            addMarker(mouseEvent.latLng);
-        });
+            // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
+            kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+                // 클릭한 위치에 마커를 표시합니다 
+                addMarker(mouseEvent.latLng);
+            });
 
 
         function callbackPlaceMessage(message) {
             try {
                 getPlace.postMessage(message);
-            } catch (err) {}
+            } catch (err) { }
         }
 
         if (oParam.lat && oParam.lan) {
@@ -103,7 +104,7 @@
             function callbackMessage(message) {
                 try {
                     onSearchKeyword.postMessage(message);
-                } catch (err) {}
+                } catch (err) { }
             }
 
             // 키워드로 장소를 검색합니다
@@ -164,7 +165,7 @@
             });
 
             // 마커에 클릭이벤트를 등록합니다
-            kakao.maps.event.addListener(marker, 'click', function() {
+            kakao.maps.event.addListener(marker, 'click', function () {
                 // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                 infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                 infowindow.open(map, marker);
@@ -194,7 +195,7 @@
 
             var moveLatLon = marker.getPosition();
 
-            geocoder.coord2Address(moveLatLon.getLng(), moveLatLon.getLat(), function(result, status) {
+            geocoder.coord2Address(moveLatLon.getLng(), moveLatLon.getLat(), function (result, status) {
 
                 if (status === kakao.maps.services.Status.OK) {
                     var saveData = result[0];
@@ -203,6 +204,33 @@
 
                     callbackPlaceMessage(JSON.stringify(saveData));
                 }
+            });
+        }
+
+        function shareKakaoTalk() {
+            Kakao.init('c8f0096a6486d0d456622ce48fa20790');
+            Kakao.Link.sendDefault({
+                objectType: 'location',
+                address: '경기 성남시 분당구 판교역로 235 에이치스퀘어 N동 8층',
+                content: {
+                    title: '신메뉴 출시♥︎ 체리블라썸라떼',
+                    description: '이번 주는 체리블라썸라떼 1+1',
+                    imageUrl: 'http://mud-kage.kakao.co.kr/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
+                    link: {
+                        mobileWebUrl: 'https://developers.kakao.com',
+                        webUrl: 'https://developers.kakao.com'
+                    }
+                },
+
+                buttons: [
+                    {
+                        title: '웹으로 보기',
+                        link: {
+                            mobileWebUrl: 'https://developers.kakao.com',
+                            webUrl: 'https://developers.kakao.com'
+                        }
+                    }
+                ]
             });
         }
     </script>
